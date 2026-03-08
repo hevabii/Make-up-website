@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   },
   description:
     "Professional makeup artistry for weddings, editorials, and special occasions. Book your session today.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
