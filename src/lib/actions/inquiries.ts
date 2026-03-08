@@ -20,7 +20,10 @@ export async function submitInquiry(data: {
 
   // Send email notification
   try {
-    await resend.emails.send({
+    console.log("Attempting to send email notification...");
+    console.log("RESEND_API_KEY exists:", !!process.env.RESEND_API_KEY);
+    
+    const result = await resend.emails.send({
       from: "onboarding@resend.dev",
       to: "adayaryan@gmail.com",
       subject: `New Inquiry from ${data.name}`,
@@ -74,9 +77,12 @@ export async function submitInquiry(data: {
         </div>
       `,
     });
+    
+    console.log("Email sent successfully:", result);
   } catch (emailError) {
     // Log email error but don't fail the inquiry submission
     console.error("Failed to send email notification:", emailError);
+    console.error("Email error details:", JSON.stringify(emailError, null, 2));
   }
 
   revalidatePath("/admin/inquiries");
