@@ -80,7 +80,7 @@ export async function submitInquiry(data: {
             ${data.preferred_time ? `
               <div style="margin-bottom: 15px;">
                 <strong style="color: #5A4049;">Preferred Time:</strong>
-                <p style="margin: 5px 0; color: #7A5C68;">${data.preferred_time}</p>
+                <p style="margin: 5px 0; color: #7A5C68;">${data.preferred_time} (PHT, UTC+8)</p>
               </div>
             ` : ''}
 

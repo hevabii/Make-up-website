@@ -36,6 +36,7 @@ import { BlockedSlot } from "@/types/database";
 import { createBlockedSlot, deleteBlockedSlot } from "@/lib/actions/availability";
 
 const HOUR_OPTIONS = Array.from({ length: 14 }, (_, i) => i + 8);
+const TIMEZONE_LABEL = "Philippine Time (PHT, UTC+8)";
 
 function formatHour(hour: number) {
   const date = new Date(2000, 0, 1, hour, 0, 0);
@@ -104,6 +105,9 @@ export function AvailabilityManager({ initialItems }: { initialItems: BlockedSlo
       <div className="rounded-lg border bg-white p-4 space-y-4">
         <p className="text-sm text-gray-600">
           Block date and time slots so clients cannot select unavailable hours.
+        </p>
+        <p className="text-xs text-gray-500">
+          Timezone: {TIMEZONE_LABEL}
         </p>
 
         <div className="grid gap-4 md:grid-cols-4">

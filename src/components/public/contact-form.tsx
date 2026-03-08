@@ -14,6 +14,7 @@ import { ArrowRight } from "lucide-react";
 import { BlockedSlot } from "@/types/database";
 
 const HOUR_OPTIONS = Array.from({ length: 14 }, (_, i) => i + 8);
+const TIMEZONE_LABEL = "Philippine Time (PHT, UTC+8)";
 
 function toTwelveHour(hour: number) {
   const date = new Date(2000, 0, 1, hour, 0, 0);
@@ -179,6 +180,9 @@ export function ContactForm({ services, blockedSlots }: ContactFormProps) {
               This date is fully booked. Please choose another date.
             </p>
           )}
+          <p className="mt-2 text-[11px] text-[#B9869A]">
+            All booking times are in {TIMEZONE_LABEL}.
+          </p>
         </div>
       </div>
 
