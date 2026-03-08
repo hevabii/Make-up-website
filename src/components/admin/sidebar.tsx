@@ -7,6 +7,7 @@ import {
   Image,
   Sparkles,
   MessageSquare,
+  CalendarDays,
   Mail,
   Settings,
   ExternalLink,
@@ -22,6 +23,7 @@ const navItems = [
   { href: "/admin/portfolio", label: "Portfolio", icon: Image },
   { href: "/admin/services", label: "Services", icon: Sparkles },
   { href: "/admin/testimonials", label: "Testimonials", icon: MessageSquare },
+  { href: "/admin/availability", label: "Availability", icon: CalendarDays },
   { href: "/admin/inquiries", label: "Inquiries", icon: Mail },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ];

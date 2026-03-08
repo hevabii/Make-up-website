@@ -47,10 +47,19 @@ export interface Inquiry {
   phone: string | null;
   service_interest: string | null;
   preferred_date: string | null;
+  preferred_time: string | null;
   message: string;
   status: "new" | "read" | "replied" | "archived";
   created_at: string;
   updated_at: string;
+}
+
+export interface BlockedSlot {
+  id: string;
+  slot_date: string;
+  slot_hour: number;
+  reason: string | null;
+  created_at: string;
 }
 
 export interface SiteSetting {

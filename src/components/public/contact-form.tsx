@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -11,6 +11,17 @@ import {
 import { submitInquiry } from "@/lib/actions/inquiries";
 import { Service } from "@/types/database";
 import { ArrowRight } from "lucide-react";
+import { BlockedSlot } from "@/types/database";
+
+const HOUR_OPTIONS = Array.from({ length: 14 }, (_, i) => i + 8);
+
+function toTwelveHour(hour: number) {
+  const date = new Date(2000, 0, 1, hour, 0, 0);
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -18,6 +29,7 @@ const schema = z.object({
   phone: z.string().optional(),
   service_interest: z.string().optional(),
   preferred_date: z.string().optional(),
+  preferred_time: z.string().optional(),
   message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
@@ -25,9 +37,10 @@ type FormValues = z.infer<typeof schema>;
 
 interface ContactFormProps {
   services: Service[];
+  blockedSlots: BlockedSlot[];
 }
 
-export function ContactForm({ services }: ContactFormProps) {
+export function ContactForm({ services, blockedSlots }: ContactFormProps) {
   const [loading, setLoading] = useState(false);
   const [cooldown, setCooldown] = useState(false);
 
@@ -39,9 +52,31 @@ export function ContactForm({ services }: ContactFormProps) {
       phone: "",
       service_interest: "",
       preferred_date: "",
+      preferred_time: "",
       message: "",
     },
   });
+
+  const selectedDate = form.watch("preferred_date");
+  const blockedHoursForDate = new Set(
+    blockedSlots
+      .filter((slot) => slot.slot_date === selectedDate)
+      .map((slot) => slot.slot_hour)
+  );
+  const selectedHour = Number((form.watch("preferred_time") || "").split(":")[0]);
+  const availableHours = HOUR_OPTIONS.filter((hour) => !blockedHoursForDate.has(hour));
+  const isDateFullyBooked = !!selectedDate && availableHours.length === 0;
+
+  useEffect(() => {
+    if (!selectedDate) {
+      form.setValue("preferred_time", "");
+      return;
+    }
+    if (Number.isNaN(selectedHour) || !blockedHoursForDate.has(selectedHour)) {
+      return;
+    }
+    form.setValue("preferred_time", "");
+  }, [selectedDate, selectedHour, blockedHoursForDate, form]);
 
   const onSubmit = async (values: FormValues) => {
     if (cooldown) return;
@@ -52,8 +87,8 @@ export function ContactForm({ services }: ContactFormProps) {
       form.reset();
       setCooldown(true);
       setTimeout(() => setCooldown(false), 30000);
-    } catch {
-      toast.error("Something went wrong. Please try again.");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -113,7 +148,37 @@ export function ContactForm({ services }: ContactFormProps) {
             type="date"
             {...form.register("preferred_date")}
             className={inputClassName}
+            min={new Date().toISOString().split("T")[0]}
           />
+        </div>
+        <div>
+          <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D3ADC0]">
+            Preferred Time (Hourly)
+          </label>
+          <Select
+            value={form.watch("preferred_time") || ""}
+            onValueChange={(v) => v && form.setValue("preferred_time", v)}
+            disabled={!selectedDate || isDateFullyBooked}
+          >
+            <SelectTrigger className="w-full bg-transparent border-0 border-b border-[#CFC5B3] rounded-none px-0 py-3 text-[14px] text-[#5A4049] focus:border-[#DC7A9D] focus:ring-0 shadow-none">
+              <SelectValue placeholder={selectedDate ? "Select an hour" : "Select a date first"} />
+            </SelectTrigger>
+            <SelectContent>
+              {availableHours.map((hour) => {
+                const value = `${String(hour).padStart(2, "0")}:00`;
+                return (
+                  <SelectItem key={value} value={value}>
+                    {toTwelveHour(hour)}
+                  </SelectItem>
+                );
+              })}
+            </SelectContent>
+          </Select>
+          {isDateFullyBooked && (
+            <p className="mt-2 text-[11px] text-red-400">
+              This date is fully booked. Please choose another date.
+            </p>
+          )}
         </div>
       </div>
 

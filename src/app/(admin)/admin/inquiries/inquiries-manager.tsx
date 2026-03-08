@@ -139,6 +139,10 @@ export function InquiriesManager({ initialItems }: { initialItems: Inquiry[] }) 
                   <p className="font-medium text-gray-500">Preferred Date</p>
                   <p>{selectedInquiry.preferred_date || "\u2014"}</p>
                 </div>
+                <div>
+                  <p className="font-medium text-gray-500">Preferred Time</p>
+                  <p>{selectedInquiry.preferred_time || "\u2014"}</p>
+                </div>
               </div>
               <div>
                 <p className="font-medium text-gray-500 text-sm mb-1">Message</p>

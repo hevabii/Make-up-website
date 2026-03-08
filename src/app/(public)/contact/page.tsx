@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { getAllSettings } from "@/lib/queries/settings";
 import { getActiveServices } from "@/lib/queries/services";
+import { getBlockedSlots } from "@/lib/queries/availability";
 import { ContactForm } from "@/components/public/contact-form";
 
 export const metadata: Metadata = {
@@ -12,9 +13,10 @@ export const metadata: Metadata = {
 export const revalidate = 3600;
 
 export default async function ContactPage() {
-  const [settings, services] = await Promise.all([
+  const [settings, services, blockedSlots] = await Promise.all([
     getAllSettings(),
     getActiveServices(),
+    getBlockedSlots(),
   ]);
 
   return (
@@ -37,7 +39,7 @@ export default async function ContactPage() {
           <div className="grid gap-20 lg:grid-cols-5">
             {/* Form */}
             <div className="lg:col-span-3">
-              <ContactForm services={services} />
+              <ContactForm services={services} blockedSlots={blockedSlots} />
             </div>
 
             {/* Contact Info */}
