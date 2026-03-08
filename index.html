@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glam by Heva | Makeup Artist</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">Glam by Heva</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact" class="nav-cta">Book Now</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <p class="hero-tagline">Professional Makeup Artist</p>
+      <h1 class="hero-title">Beauty Is An Art.<br />Let Me Create Yours.</h1>
+      <p class="hero-subtitle">Bridal · Editorial · Special Occasions · Everyday Glam</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary">Book a Session</a>
+        <a href="#gallery" class="btn btn-secondary">View Portfolio</a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <div class="about-image-placeholder">
+            <span>✦</span>
+          </div>
+          <div class="about-badge">
+            <span class="badge-number">8+</span>
+            <span class="badge-text">Years of Experience</span>
+          </div>
+        </div>
+        <div class="about-content">
+          <p class="section-label">About Me</p>
+          <h2 class="section-title">Crafting Beauty,<br />One Brushstroke at a Time</h2>
+          <p class="about-text">
+            With over eight years in the beauty industry, I bring a passion for artistry and an eye for detail to every look I create. From soft, natural glows to bold, dramatic statements — I tailor each experience to highlight your unique beauty.
+          </p>
+          <p class="about-text">
+            Trained in Los Angeles and certified in advanced skincare, I work with premium products to ensure your makeup looks flawless in person and on camera.
+          </p>
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-number">500+</span>
+              <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">120+</span>
+              <span class="stat-label">Bridal Looks</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">30+</span>
+              <span class="stat-label">Editorial Shoots</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services" id="services">
+    <div class="container">
+      <p class="section-label center">Services</p>
+      <h2 class="section-title center">What I Offer</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">💍</div>
+          <h3>Bridal Makeup</h3>
+          <p>Look radiant on your most important day. Includes a trial session, day-of application, and touch-up kit.</p>
+          <span class="service-price">From $250</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">✨</div>
+          <h3>Special Occasion</h3>
+          <p>Galas, proms, birthdays, and parties. A flawless look for every milestone moment in your life.</p>
+          <span class="service-price">From $120</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📸</div>
+          <h3>Editorial &amp; Photoshoots</h3>
+          <p>Camera-ready looks for professional photo and video shoots, runway, and creative projects.</p>
+          <span class="service-price">From $180</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🌸</div>
+          <h3>Everyday Glam</h3>
+          <p>Enhance your natural beauty with a polished everyday look, plus tips you can take home.</p>
+          <span class="service-price">From $80</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👥</div>
+          <h3>Group Bookings</h3>
+          <p>Weddings, bachelorettes, and events — I bring the glam to your whole party.</p>
+          <span class="service-price">Custom Quote</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3>Makeup Lessons</h3>
+          <p>One-on-one lessons tailored to your skill level and the looks you want to master.</p>
+          <span class="service-price">From $100/hr</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <p class="section-label center">Portfolio</p>
+      <h2 class="section-title center">My Work</h2>
+      <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="bridal">Bridal</button>
+        <button class="filter-btn" data-filter="editorial">Editorial</button>
+        <button class="filter-btn" data-filter="glam">Glam</button>
+      </div>
+      <div class="gallery-grid" id="galleryGrid">
+        <div class="gallery-item" data-category="bridal">
+          <div class="gallery-placeholder">Bridal 1</div>
+          <div class="gallery-overlay"><span>Bridal Look</span></div>
+        </div>
+        <div class="gallery-item" data-category="editorial">
+          <div class="gallery-placeholder">Editorial 1</div>
+          <div class="gallery-overlay"><span>Editorial</span></div>
+        </div>
+        <div class="gallery-item" data-category="glam">
+          <div class="gallery-placeholder">Glam 1</div>
+          <div class="gallery-overlay"><span>Evening Glam</span></div>
+        </div>
+        <div class="gallery-item" data-category="bridal">
+          <div class="gallery-placeholder">Bridal 2</div>
+          <div class="gallery-overlay"><span>Bridal Look</span></div>
+        </div>
+        <div class="gallery-item" data-category="glam">
+          <div class="gallery-placeholder">Glam 2</div>
+          <div class="gallery-overlay"><span>Special Occasion</span></div>
+        </div>
+        <div class="gallery-item" data-category="editorial">
+          <div class="gallery-placeholder">Editorial 2</div>
+          <div class="gallery-overlay"><span>Editorial</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <p class="section-label center">Testimonials</p>
+      <h2 class="section-title center">What My Clients Say</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Heva made me feel like an absolute queen on my wedding day. She was professional, calm, and the makeup lasted all day. I couldn't have asked for more!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">S</div>
+            <div>
+              <strong>Sofia M.</strong>
+              <span>Bride</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"I booked Heva for my birthday photoshoot and she absolutely nailed the glam look I wanted. Her attention to detail is unmatched. Will book again!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">A</div>
+            <div>
+              <strong>Alyssa T.</strong>
+              <span>Editorial Client</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">"Such a wonderful experience! She listened to exactly what I wanted and exceeded my expectations. My bridesmaids loved her too. Highly recommend!"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <strong>Maya R.</strong>
+              <span>Bride</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Booking Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="section-label">Get in Touch</p>
+          <h2 class="section-title">Let's Create<br />Something Beautiful</h2>
+          <p class="contact-description">Ready to book or have questions? Send me a message and I'll get back to you within 24 hours.</p>
+          <div class="contact-details">
+            <div class="contact-item">
+              <span class="contact-icon">📍</span>
+              <span>Los Angeles, CA (available for travel)</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📧</span>
+              <span>hello@glambyheva.com</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">📱</span>
+              <span>+1 (310) 555-0192</span>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
+            <a href="#" class="social-link" aria-label="TikTok">TikTok</a>
+            <a href="#" class="social-link" aria-label="Pinterest">Pinterest</a>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+          </div>
+          <div class="form-group">
+            <label for="service">Service Interested In</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Select a service</option>
+              <option value="bridal">Bridal Makeup</option>
+              <option value="special">Special Occasion</option>
+              <option value="editorial">Editorial / Photoshoot</option>
+              <option value="everyday">Everyday Glam</option>
+              <option value="group">Group Booking</option>
+              <option value="lesson">Makeup Lesson</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">Preferred Date</label>
+            <input type="date" id="date" name="date" />
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell me about your event or any questions you have..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary full-width">Send Message</button>
+          <p class="form-success" id="formSuccess">✔ Thank you! I'll be in touch soon.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <span class="footer-logo">Glam by Heva</span>
+        <p class="footer-copy">&copy; 2026 Glam by Heva. All rights reserved.</p>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
