@@ -26,8 +26,8 @@ export default function AdminLoginPage() {
       setError(error.message);
       setLoading(false);
     } else {
-      router.push("/admin");
-      router.refresh();
+      // Use full page reload to ensure cookies are sent
+      window.location.href = "/admin";
     }
   };
 
