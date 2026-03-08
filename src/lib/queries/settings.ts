@@ -1,8 +1,8 @@
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createPublicServerSupabaseClient } from "@/lib/supabase/public-server";
 
 export async function getAllSettings(): Promise<Record<string, string>> {
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicServerSupabaseClient();
     const { data, error } = await supabase.from("site_settings").select("key, value");
     if (error) {
       console.error("[settings] getAllSettings failed:", error.message);
@@ -17,7 +17,7 @@ export async function getAllSettings(): Promise<Record<string, string>> {
 
 export async function getSetting(key: string): Promise<string> {
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicServerSupabaseClient();
     const { data, error } = await supabase
       .from("site_settings")
       .select("value")

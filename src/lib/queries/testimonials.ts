@@ -1,10 +1,10 @@
 import { Testimonial } from "@/types/database";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createPublicServerSupabaseClient } from "@/lib/supabase/public-server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function getFeaturedTestimonials(): Promise<Testimonial[]> {
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicServerSupabaseClient();
     const { data, error } = await supabase
       .from("testimonials")
       .select("*")
@@ -23,7 +23,7 @@ export async function getFeaturedTestimonials(): Promise<Testimonial[]> {
 
 export async function getPublishedTestimonials(): Promise<Testimonial[]> {
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicServerSupabaseClient();
     const { data, error } = await supabase
       .from("testimonials")
       .select("*")

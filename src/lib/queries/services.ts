@@ -1,10 +1,10 @@
 import { Service } from "@/types/database";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createPublicServerSupabaseClient } from "@/lib/supabase/public-server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function getActiveServices(): Promise<Service[]> {
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicServerSupabaseClient();
     const { data, error } = await supabase
       .from("services")
       .select("*")

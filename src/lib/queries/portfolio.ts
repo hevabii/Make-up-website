@@ -1,10 +1,10 @@
 import { PortfolioItem } from "@/types/database";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createPublicServerSupabaseClient } from "@/lib/supabase/public-server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 export async function getPublishedPortfolioItems(): Promise<PortfolioItem[]> {
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicServerSupabaseClient();
     const { data, error } = await supabase
       .from("portfolio_items")
       .select("*")
@@ -23,7 +23,7 @@ export async function getPublishedPortfolioItems(): Promise<PortfolioItem[]> {
 
 export async function getFeaturedPortfolioItems(): Promise<PortfolioItem[]> {
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicServerSupabaseClient();
     const { data, error } = await supabase
       .from("portfolio_items")
       .select("*")
@@ -44,7 +44,7 @@ export async function getFeaturedPortfolioItems(): Promise<PortfolioItem[]> {
 
 export async function getPortfolioItemBySlug(slug: string): Promise<PortfolioItem | null> {
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicServerSupabaseClient();
     const { data, error } = await supabase
       .from("portfolio_items")
       .select("*")

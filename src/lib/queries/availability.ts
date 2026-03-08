@@ -1,10 +1,10 @@
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createPublicServerSupabaseClient } from "@/lib/supabase/public-server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { BlockedSlot } from "@/types/database";
 
 export async function getBlockedSlots(): Promise<BlockedSlot[]> {
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicServerSupabaseClient();
     const { data, error } = await supabase
       .from("blocked_slots")
       .select("id, slot_date, slot_hour, reason, created_at")
