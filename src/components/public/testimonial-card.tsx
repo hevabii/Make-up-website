@@ -18,22 +18,22 @@ export function TestimonialCard({ testimonial, index = 0 }: TestimonialCardProps
       className="relative px-8 py-10"
     >
       {/* Decorative quote */}
-      <span className="absolute top-4 left-4 font-playfair text-7xl leading-none text-[#B8977E]/10 select-none pointer-events-none">
+      <span className="absolute top-4 left-4 font-playfair text-7xl leading-none text-[#DC7A9D]/10 select-none pointer-events-none">
         &ldquo;
       </span>
 
-      <p className="relative font-playfair text-lg leading-relaxed text-[#1C1917]/80 italic">
+      <p className="relative font-playfair text-lg leading-relaxed text-[#5A4049]/80 italic">
         {testimonial.content}
       </p>
 
       <div className="mt-8 flex items-center gap-4">
-        <div className="h-px flex-1 bg-[#E7E0D8]" />
+        <div className="h-px flex-1 bg-[#CFC5B3]" />
         <div className="text-right">
-          <p className="text-[12px] font-medium tracking-[0.1em] uppercase text-[#1C1917]">
+          <p className="text-[12px] font-medium tracking-[0.1em] uppercase text-[#5A4049]">
             {testimonial.client_name}
           </p>
           {testimonial.service_type && (
-            <p className="text-[10px] tracking-[0.15em] uppercase text-[#A8A29E] mt-1">
+            <p className="text-[10px] tracking-[0.15em] uppercase text-[#D3ADC0] mt-1">
               {testimonial.service_type}
             </p>
           )}

@@ -90,7 +90,7 @@ export function ServiceForm({ open, onOpenChange, editItem }: ServiceFormProps) 
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="price">Price ($)</Label>
+              <Label htmlFor="price">Price (PHP)</Label>
               <Input
                 id="price"
                 type="number"

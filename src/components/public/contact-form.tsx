@@ -59,13 +59,13 @@ export function ContactForm({ services }: ContactFormProps) {
     }
   };
 
-  const inputClassName = "w-full bg-transparent border-0 border-b border-[#E7E0D8] px-0 py-3 text-[14px] text-[#1C1917] placeholder:text-[#A8A29E] focus:border-[#B8977E] focus:ring-0 focus:outline-none transition-colors duration-300";
+  const inputClassName = "w-full bg-transparent border-0 border-b border-[#CFC5B3] px-0 py-3 text-[14px] text-[#5A4049] placeholder:text-[#D3ADC0] focus:border-[#DC7A9D] focus:ring-0 focus:outline-none transition-colors duration-300";
 
   return (
     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
       <div className="grid gap-8 sm:grid-cols-2">
         <div>
-          <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#A8A29E]">
+          <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D3ADC0]">
             Name *
           </label>
           <input
@@ -78,7 +78,7 @@ export function ContactForm({ services }: ContactFormProps) {
           )}
         </div>
         <div>
-          <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#A8A29E]">
+          <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D3ADC0]">
             Email *
           </label>
           <input
@@ -95,7 +95,7 @@ export function ContactForm({ services }: ContactFormProps) {
 
       <div className="grid gap-8 sm:grid-cols-2">
         <div>
-          <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#A8A29E]">
+          <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D3ADC0]">
             Phone
           </label>
           <input
@@ -106,7 +106,7 @@ export function ContactForm({ services }: ContactFormProps) {
           />
         </div>
         <div>
-          <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#A8A29E]">
+          <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D3ADC0]">
             Preferred Date
           </label>
           <input
@@ -118,14 +118,14 @@ export function ContactForm({ services }: ContactFormProps) {
       </div>
 
       <div>
-        <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#A8A29E]">
+        <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D3ADC0]">
           Service Interest
         </label>
         <Select
           value={form.watch("service_interest")}
           onValueChange={(v) => v && form.setValue("service_interest", v)}
         >
-          <SelectTrigger className="w-full bg-transparent border-0 border-b border-[#E7E0D8] rounded-none px-0 py-3 text-[14px] text-[#1C1917] focus:border-[#B8977E] focus:ring-0 shadow-none">
+          <SelectTrigger className="w-full bg-transparent border-0 border-b border-[#CFC5B3] rounded-none px-0 py-3 text-[14px] text-[#5A4049] focus:border-[#DC7A9D] focus:ring-0 shadow-none">
             <SelectValue placeholder="Select a service..." />
           </SelectTrigger>
           <SelectContent>
@@ -139,7 +139,7 @@ export function ContactForm({ services }: ContactFormProps) {
       </div>
 
       <div>
-        <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#A8A29E]">
+        <label className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#D3ADC0]">
           Message *
         </label>
         <textarea
@@ -157,7 +157,7 @@ export function ContactForm({ services }: ContactFormProps) {
         <button
           type="submit"
           disabled={loading || cooldown}
-          className="btn-luxury group inline-flex items-center gap-3 border border-[#1C1917] px-10 py-4 text-[11px] font-medium uppercase tracking-[0.25em] text-[#1C1917] transition-all duration-500 hover:border-[#B8977E] hover:bg-[#B8977E] hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
+          className="btn-luxury group inline-flex items-center gap-3 border border-[#5A4049] px-10 py-4 text-[11px] font-medium uppercase tracking-[0.25em] text-[#5A4049] transition-all duration-500 hover:border-[#DC7A9D] hover:bg-[#DC7A9D] hover:text-white disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {loading ? "Sending..." : cooldown ? "Inquiry Received" : "Send Inquiry"}
           {!loading && !cooldown && (

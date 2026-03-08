@@ -74,7 +74,7 @@ export function ServicesManager({ initialItems }: { initialItems: Service[] }) {
                   <TableCell className="font-medium">{item.name}</TableCell>
                   <TableCell><Badge variant="secondary">{item.category}</Badge></TableCell>
                   <TableCell>
-                    {item.price ? `$${item.price}` : "\u2014"}
+                    {item.price ? `PHP ${item.price}` : "\u2014"}
                     {item.price_note && <span className="text-xs text-gray-400 ml-1">{item.price_note}</span>}
                   </TableCell>
                   <TableCell>{item.duration || "\u2014"}</TableCell>

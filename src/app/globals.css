@@ -58,7 +58,7 @@ body {
 .luxury-divider {
   width: 60px;
   height: 1px;
-  background: #B8977E;
+  background: #DC7A9D;
   margin: 0 auto;
 }
 
@@ -78,7 +78,7 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: #B8977E;
+  background: #DC7A9D;
   transition: width 0.3s ease;
 }
 .nav-link-luxury:hover::after,
@@ -94,7 +94,7 @@ body {
 
 /* Gold gradient text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #B8977E 0%, #D4B896 50%, #B8977E 100%);
+  background: linear-gradient(135deg, #DC7A9D 0%, #E8C1D2 50%, #DC7A9D 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

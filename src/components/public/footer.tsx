@@ -7,9 +7,9 @@ interface FooterProps {
 
 export function Footer({ settings }: FooterProps) {
   return (
-    <footer className="bg-[#1C1917]">
+    <footer className="bg-[#5A4049]">
       {/* Gold accent line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#B8977E] to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-[#DC7A9D] to-transparent" />
 
       <div className="mx-auto max-w-4xl px-8 py-20 text-center">
         {/* Brand */}
@@ -19,7 +19,7 @@ export function Footer({ settings }: FooterProps) {
           </h3>
         </Link>
 
-        <p className="mt-6 text-[13px] leading-relaxed text-white/40 max-w-md mx-auto">
+        <p className="mt-6 text-[13px] leading-relaxed text-white/75 max-w-md mx-auto">
           {settings.footer_text || "Professional makeup artistry for weddings, editorials, and special occasions."}
         </p>
 
@@ -34,7 +34,7 @@ export function Footer({ settings }: FooterProps) {
             <Link
               key={link.href}
               href={link.href}
-              className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/40 hover:text-[#B8977E] transition-colors duration-300"
+              className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/80 hover:text-[#DC7A9D] transition-colors duration-300"
             >
               {link.label}
             </Link>
@@ -42,16 +42,16 @@ export function Footer({ settings }: FooterProps) {
         </nav>
 
         {/* Contact details */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-[11px] text-white/30">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-[11px] text-white/75">
           {settings.contact_email && (
-            <a href={`mailto:${settings.contact_email}`} className="hover:text-[#B8977E] transition-colors">
+            <a href={`mailto:${settings.contact_email}`} className="hover:text-[#DC7A9D] transition-colors">
               {settings.contact_email}
             </a>
           )}
           {settings.contact_phone && (
             <>
               <span className="text-white/10">|</span>
-              <a href={`tel:${settings.contact_phone}`} className="hover:text-[#B8977E] transition-colors">
+              <a href={`tel:${settings.contact_phone}`} className="hover:text-[#DC7A9D] transition-colors">
                 {settings.contact_phone}
               </a>
             </>
@@ -71,7 +71,7 @@ export function Footer({ settings }: FooterProps) {
               href={settings.social_instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/30 hover:text-[#B8977E] transition-colors duration-300"
+              className="text-white/75 hover:text-[#DC7A9D] transition-colors duration-300"
             >
               <Instagram className="h-4 w-4" strokeWidth={1.5} />
             </a>
@@ -81,7 +81,7 @@ export function Footer({ settings }: FooterProps) {
               href={settings.social_facebook}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/30 hover:text-[#B8977E] transition-colors duration-300"
+              className="text-white/75 hover:text-[#DC7A9D] transition-colors duration-300"
             >
               <Facebook className="h-4 w-4" strokeWidth={1.5} />
             </a>
@@ -91,7 +91,7 @@ export function Footer({ settings }: FooterProps) {
               href={settings.social_tiktok}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/30 hover:text-[#B8977E] transition-colors duration-300"
+              className="text-white/75 hover:text-[#DC7A9D] transition-colors duration-300"
             >
               <Music className="h-4 w-4" strokeWidth={1.5} />
             </a>
@@ -100,7 +100,7 @@ export function Footer({ settings }: FooterProps) {
 
         {/* Copyright */}
         <div className="mt-16 pt-8 border-t border-white/5">
-          <p className="text-[10px] tracking-[0.15em] uppercase text-white/20">
+          <p className="text-[10px] tracking-[0.15em] uppercase text-white/60">
             &copy; {new Date().getFullYear()} Beauty Artist. All rights reserved.
           </p>
         </div>

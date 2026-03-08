@@ -22,10 +22,10 @@ export function PortfolioPageClient({ items }: PortfolioPageClientProps) {
   return (
     <>
       <section className="pt-32 pb-20 px-8 lg:px-12 text-center">
-        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#A8A29E] mb-6">
+        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#D3ADC0] mb-6">
           My Work
         </p>
-        <h1 className="font-playfair text-5xl md:text-6xl text-[#1C1917] italic">
+        <h1 className="font-playfair text-5xl md:text-6xl text-[#5A4049] italic">
           Portfolio
         </h1>
         <div className="luxury-divider mt-8" />
@@ -37,14 +37,14 @@ export function PortfolioPageClient({ items }: PortfolioPageClientProps) {
           <div className="flex flex-wrap items-center justify-center gap-6 mb-16">
             {categories.map((cat, index) => (
               <span key={cat} className="flex items-center gap-6">
-                {index > 0 && <span className="text-[#E7E0D8]">|</span>}
+                {index > 0 && <span className="text-[#CFC5B3]">|</span>}
                 <button
                   onClick={() => setActiveCategory(cat)}
                   className={cn(
                     "text-[11px] font-medium uppercase tracking-[0.2em] transition-colors duration-300",
                     activeCategory === cat
-                      ? "text-[#B8977E]"
-                      : "text-[#A8A29E] hover:text-[#1C1917]"
+                      ? "text-[#DC7A9D]"
+                      : "text-[#D3ADC0] hover:text-[#5A4049]"
                   )}
                 >
                   {cat}
@@ -56,7 +56,7 @@ export function PortfolioPageClient({ items }: PortfolioPageClientProps) {
           {filteredItems.length > 0 ? (
             <PortfolioGrid items={filteredItems} />
           ) : (
-            <p className="text-center text-[14px] text-[#A8A29E] py-20">
+            <p className="text-center text-[14px] text-[#D3ADC0] py-20">
               No items in this category yet.
             </p>
           )}

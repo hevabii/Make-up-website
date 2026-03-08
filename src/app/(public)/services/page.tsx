@@ -32,14 +32,14 @@ export default async function ServicesPage() {
   return (
     <>
       <section className="pt-32 pb-20 px-8 lg:px-12 text-center">
-        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#A8A29E] mb-6">
+        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#D3ADC0] mb-6">
           What I Offer
         </p>
-        <h1 className="font-playfair text-5xl md:text-6xl text-[#1C1917] italic">
+        <h1 className="font-playfair text-5xl md:text-6xl text-[#5A4049] italic">
           Services
         </h1>
         <div className="luxury-divider mt-8" />
-        <p className="mt-8 text-[14px] leading-relaxed text-[#78716C] max-w-lg mx-auto">
+        <p className="mt-8 text-[14px] leading-relaxed text-[#B9869A] max-w-lg mx-auto">
           Every service is tailored to your unique vision, ensuring you look and feel extraordinary.
         </p>
       </section>
@@ -49,16 +49,16 @@ export default async function ServicesPage() {
           {Object.entries(grouped).map(([category, items]) => (
             <div key={category}>
               <div className="flex items-center gap-6 mb-12">
-                <div className="h-px flex-1 bg-[#E7E0D8]" />
-                <h2 className="text-[11px] font-medium uppercase tracking-[0.25em] text-[#A8A29E] shrink-0">
+                <div className="h-px flex-1 bg-[#CFC5B3]" />
+                <h2 className="text-[11px] font-medium uppercase tracking-[0.25em] text-[#D3ADC0] shrink-0">
                   {categoryLabels[category] || category}
                 </h2>
-                <div className="h-px flex-1 bg-[#E7E0D8]" />
+                <div className="h-px flex-1 bg-[#CFC5B3]" />
               </div>
-              <div className="flex flex-wrap gap-px bg-[#E7E0D8] justify-center">
+              <div className="flex flex-wrap items-stretch gap-px bg-[#CFC5B3] justify-center">
                 {items.map((service, index) => (
-                  <div key={service.id} className="w-full sm:w-[calc(50%-0.5px)] lg:w-[calc(33.333%-0.67px)]">
-                    <ServiceCard service={service} index={index} />
+                  <div key={service.id} className="flex w-full sm:w-[calc(50%-0.5px)] lg:w-[calc(33.333%-0.67px)]">
+                    <ServiceCard service={service} index={index} disableAnimation />
                   </div>
                 ))}
               </div>
@@ -69,16 +69,16 @@ export default async function ServicesPage() {
 
       {/* CTA */}
       <section className="py-28 px-8 lg:px-12 bg-white text-center">
-        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#A8A29E] mb-6">
+        <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#D3ADC0] mb-6">
           Ready?
         </p>
-        <h2 className="font-playfair text-3xl md:text-4xl text-[#1C1917] italic">
+        <h2 className="font-playfair text-3xl md:text-4xl text-[#5A4049] italic">
           Let&apos;s Create Something Beautiful
         </h2>
         <div className="mt-10">
           <Link
             href="/contact"
-            className="btn-luxury group inline-flex items-center gap-3 border border-[#1C1917] px-10 py-4 text-[11px] font-medium uppercase tracking-[0.25em] text-[#1C1917] transition-all duration-500 hover:border-[#B8977E] hover:bg-[#B8977E] hover:text-white"
+            className="btn-luxury group inline-flex items-center gap-3 border border-[#5A4049] px-10 py-4 text-[11px] font-medium uppercase tracking-[0.25em] text-[#5A4049] transition-all duration-500 hover:border-[#DC7A9D] hover:bg-[#DC7A9D] hover:text-white"
           >
             Book a Consultation
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />

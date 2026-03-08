@@ -32,10 +32,10 @@ export default async function HomePage() {
         <section className="py-32 px-8 lg:px-12">
           <div className="mx-auto max-w-7xl">
             <div className="text-center mb-20">
-              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#A8A29E] mb-6">
+              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#D3ADC0] mb-6">
                 Portfolio
               </p>
-              <h2 className="font-playfair text-4xl md:text-5xl text-[#1C1917]">
+              <h2 className="font-playfair text-4xl md:text-5xl text-[#5A4049]">
                 Featured Work
               </h2>
               <div className="luxury-divider mt-8" />
@@ -44,7 +44,7 @@ export default async function HomePage() {
             <div className="mt-16 text-center">
               <Link
                 href="/portfolio"
-                className="group inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[#78716C] hover:text-[#B8977E] transition-colors duration-300"
+                className="group inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[#B9869A] hover:text-[#DC7A9D] transition-colors duration-300"
               >
                 Explore the collection
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
@@ -59,18 +59,18 @@ export default async function HomePage() {
         <section className="py-32 px-8 lg:px-12 bg-white">
           <div className="mx-auto max-w-7xl">
             <div className="text-center mb-20">
-              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#A8A29E] mb-6">
+              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#D3ADC0] mb-6">
                 What I Offer
               </p>
-              <h2 className="font-playfair text-4xl md:text-5xl text-[#1C1917]">
+              <h2 className="font-playfair text-4xl md:text-5xl text-[#5A4049]">
                 Services
               </h2>
               <div className="luxury-divider mt-8" />
-              <p className="mt-8 text-[14px] leading-relaxed text-[#78716C] max-w-lg mx-auto">
+              <p className="mt-8 text-[14px] leading-relaxed text-[#B9869A] max-w-lg mx-auto">
                 Tailored beauty services designed to enhance your natural radiance for every occasion.
               </p>
             </div>
-            <div className="grid gap-px bg-[#E7E0D8] sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-px bg-[#CFC5B3] sm:grid-cols-2 lg:grid-cols-3">
               {services.slice(0, 6).map((service, index) => (
                 <ServiceCard key={service.id} service={service} index={index} />
               ))}
@@ -78,7 +78,7 @@ export default async function HomePage() {
             <div className="mt-16 text-center">
               <Link
                 href="/services"
-                className="group inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[#78716C] hover:text-[#B8977E] transition-colors duration-300"
+                className="group inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[#B9869A] hover:text-[#DC7A9D] transition-colors duration-300"
               >
                 View all services
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.5} />
@@ -93,15 +93,15 @@ export default async function HomePage() {
         <section className="py-32 px-8 lg:px-12">
           <div className="mx-auto max-w-6xl">
             <div className="text-center mb-20">
-              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#A8A29E] mb-6">
+              <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#D3ADC0] mb-6">
                 Testimonials
               </p>
-              <h2 className="font-playfair text-4xl md:text-5xl text-[#1C1917]">
+              <h2 className="font-playfair text-4xl md:text-5xl text-[#5A4049]">
                 Kind Words
               </h2>
               <div className="luxury-divider mt-8" />
             </div>
-            <div className="grid gap-0 divide-x divide-[#E7E0D8] md:grid-cols-3">
+            <div className="grid gap-0 divide-x divide-[#CFC5B3] md:grid-cols-3">
               {testimonials.map((testimonial, index) => (
                 <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
               ))}
@@ -111,8 +111,8 @@ export default async function HomePage() {
       )}
 
       {/* CTA */}
-      <section className="relative py-32 px-8 lg:px-12 bg-[#1C1917] overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#B8977E]/5 via-transparent to-[#B8977E]/3" />
+      <section className="relative py-32 px-8 lg:px-12 bg-[#5A4049] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#DC7A9D]/5 via-transparent to-[#DC7A9D]/3" />
         <div className="relative mx-auto max-w-2xl text-center">
           <div className="luxury-divider mb-12" style={{ background: "rgba(184, 151, 126, 0.4)" }} />
           <h2 className="font-playfair text-4xl md:text-5xl text-white italic">
@@ -124,7 +124,7 @@ export default async function HomePage() {
           <div className="mt-12">
             <Link
               href="/contact"
-              className="btn-luxury inline-block border border-white/30 px-12 py-4 text-[11px] font-medium uppercase tracking-[0.25em] text-white/80 transition-all duration-500 hover:border-[#B8977E] hover:bg-[#B8977E] hover:text-white"
+              className="btn-luxury inline-block border border-white/30 px-12 py-4 text-[11px] font-medium uppercase tracking-[0.25em] text-white/80 transition-all duration-500 hover:border-[#DC7A9D] hover:bg-[#DC7A9D] hover:text-white"
             >
               Get in Touch
             </Link>

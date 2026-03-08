@@ -53,14 +53,14 @@ export default async function PortfolioDetailPage({ params }: Props) {
 
       {/* Cover Image */}
       <div className="mt-8 mx-auto max-w-4xl px-8 lg:px-12">
-        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-[#E7E0D8]">
+        <div className="relative aspect-[3/4] w-full max-h-[600px] overflow-hidden rounded-sm bg-[#E7E0D8]">
           {item.cover_image_url ? (
             <Image
               src={item.cover_image_url}
               alt={item.title}
               fill
               sizes="(max-width: 768px) 100vw, 896px"
-              className="object-cover"
+              className="object-contain"
               priority
             />
           ) : (
@@ -96,13 +96,13 @@ export default async function PortfolioDetailPage({ params }: Props) {
         <section className="pb-20 px-8 lg:px-12">
           <div className="mx-auto max-w-6xl grid gap-4 sm:grid-cols-2">
             {item.images.map((url, index) => (
-              <div key={index} className="relative aspect-[4/5] overflow-hidden rounded-sm bg-[#E7E0D8]">
+              <div key={index} className="relative aspect-[3/4] max-h-[500px] overflow-hidden rounded-sm bg-[#E7E0D8]">
                 <Image
                   src={url}
                   alt={`${item.title} - Image ${index + 1}`}
                   fill
                   sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </div>
             ))}

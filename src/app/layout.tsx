@@ -31,7 +31,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable} scroll-smooth`}>
-      <body className="font-sans bg-[#FAF9F7] text-[#1C1917] antialiased selection:bg-[#B8977E]/20 selection:text-[#1C1917]">
+      <body className="font-sans bg-[#F5EFE4] text-[#5A4049] antialiased selection:bg-[#DC7A9D]/20 selection:text-[#5A4049]">
         {children}
         <Toaster position="top-center" richColors />
       </body>
