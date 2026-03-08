@@ -24,13 +24,26 @@ export async function getBlockedSlots(): Promise<BlockedSlot[]> {
 }
 
 export async function getAllBlockedSlots(): Promise<BlockedSlot[]> {
-  const supabase = createAdminClient();
-  const { data, error } = await supabase
-    .from("blocked_slots")
-    .select("id, slot_date, slot_hour, reason, created_at")
-    .order("slot_date", { ascending: true })
-    .order("slot_hour", { ascending: true });
+  try {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from("blocked_slots")
+      .select("id, slot_date, slot_hour, reason, created_at")
+      .order("slot_date", { ascending: true })
+      .order("slot_hour", { ascending: true });
 
-  if (error) throw error;
-  return (data ?? []) as BlockedSlot[];
+    if (error) {
+      // If migration is not yet applied, keep admin page usable instead of crashing.
+      if (error.code === "42P01") {
+        console.warn("[availability] blocked_slots table missing. Run migration 003_add_availability_slots.sql");
+        return [];
+      }
+      throw new Error(error.message || "Failed to load availability slots");
+    }
+
+    return (data ?? []) as BlockedSlot[];
+  } catch (error) {
+    console.error("[availability] getAllBlockedSlots exception:", error);
+    return [];
+  }
 }

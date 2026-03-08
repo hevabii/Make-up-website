@@ -26,14 +26,31 @@ export async function submitInquiry(data: {
       .eq("slot_hour", hour)
       .maybeSingle();
 
-    if (blockedError) throw blockedError;
+    if (blockedError && blockedError.code !== "42P01") {
+      throw new Error(blockedError.message || "Failed to validate selected date and time");
+    }
     if (blocked) {
       throw new Error("That date and time is unavailable. Please choose another slot.");
     }
   }
 
-  const { error } = await supabase.from("inquiries").insert(data);
-  if (error) throw error;
+  let insertPayload = data;
+  let { error } = await supabase.from("inquiries").insert(insertPayload);
+
+  // Allow deploy to keep working if migration for preferred_time was not run yet.
+  if (error && (error.code === "PGRST204" || error.code === "42703")) {
+    const { preferred_time: _omit, ...fallbackPayload } = data;
+    insertPayload = fallbackPayload;
+    const retry = await supabase.from("inquiries").insert(insertPayload);
+    error = retry.error;
+  }
+
+  if (error) {
+    if (error.code === "42P01") {
+      throw new Error("Inquiry table is missing. Please run your Supabase migrations.");
+    }
+    throw new Error(error.message || "Failed to submit inquiry");
+  }
 
   // Send email notification
   try {

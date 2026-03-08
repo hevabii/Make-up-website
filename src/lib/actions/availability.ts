@@ -26,7 +26,10 @@ export async function createBlockedSlot(data: {
     if (error.code === "23505") {
       throw new Error("This date and hour is already blocked");
     }
-    throw error;
+    if (error.code === "42P01") {
+      throw new Error("Availability table is missing. Please run migration 003_add_availability_slots.sql in Supabase.");
+    }
+    throw new Error(error.message || "Failed to block slot");
   }
 
   revalidatePath("/contact");
@@ -36,7 +39,12 @@ export async function createBlockedSlot(data: {
 export async function deleteBlockedSlot(id: string) {
   const supabase = createAdminClient();
   const { error } = await supabase.from("blocked_slots").delete().eq("id", id);
-  if (error) throw error;
+  if (error) {
+    if (error.code === "42P01") {
+      throw new Error("Availability table is missing. Please run migration 003_add_availability_slots.sql in Supabase.");
+    }
+    throw new Error(error.message || "Failed to remove blocked slot");
+  }
 
   revalidatePath("/contact");
   revalidatePath("/admin/availability");
