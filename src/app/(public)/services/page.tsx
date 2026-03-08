@@ -55,9 +55,11 @@ export default async function ServicesPage() {
                 </h2>
                 <div className="h-px flex-1 bg-[#E7E0D8]" />
               </div>
-              <div className="grid gap-px bg-[#E7E0D8] sm:grid-cols-2 lg:grid-cols-3">
+              <div className="flex flex-wrap gap-px bg-[#E7E0D8] justify-center">
                 {items.map((service, index) => (
-                  <ServiceCard key={service.id} service={service} index={index} />
+                  <div key={service.id} className="w-full sm:w-[calc(50%-0.5px)] lg:w-[calc(33.333%-0.67px)]">
+                    <ServiceCard service={service} index={index} />
+                  </div>
                 ))}
               </div>
             </div>
