@@ -6,6 +6,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 export async function createTestimonial(data: {
   client_name: string;
   content: string;
+  image_url?: string;
   service_type?: string;
   rating?: number;
   is_featured?: boolean;
@@ -23,6 +24,7 @@ export async function updateTestimonial(
   data: {
     client_name?: string;
     content?: string;
+    image_url?: string | null;
     service_type?: string | null;
     rating?: number | null;
     is_featured?: boolean;

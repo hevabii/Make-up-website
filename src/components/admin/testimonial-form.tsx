@@ -12,6 +12,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { ImageUploader } from "@/components/admin/image-uploader";
+import { uploadImageAction } from "@/lib/actions/upload";
 import { createTestimonial, updateTestimonial } from "@/lib/actions/testimonials";
 import { Testimonial } from "@/types/database";
 
@@ -34,6 +36,7 @@ interface TestimonialFormProps {
 
 export function TestimonialForm({ open, onOpenChange, editItem }: TestimonialFormProps) {
   const [loading, setLoading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -50,17 +53,28 @@ export function TestimonialForm({ open, onOpenChange, editItem }: TestimonialFor
   const onSubmit = async (values: FormValues) => {
     setLoading(true);
     try {
+      let imageUrl = editItem?.image_url || undefined;
+
+      if (imageFile) {
+        const path = `testimonials/${Date.now()}.${imageFile.name.split(".").pop()}`;
+        const fd = new FormData();
+        fd.append("file", imageFile);
+        fd.append("path", path);
+        imageUrl = await uploadImageAction(fd);
+      }
+
       if (editItem) {
-        await updateTestimonial(editItem.id, values);
+        await updateTestimonial(editItem.id, { ...values, image_url: imageUrl, service_type: values.service_type ?? undefined, rating: values.rating ?? undefined });
         toast.success("Testimonial updated");
       } else {
-        await createTestimonial({ ...values, service_type: values.service_type ?? undefined, rating: values.rating ?? undefined });
+        await createTestimonial({ ...values, image_url: imageUrl, service_type: values.service_type ?? undefined, rating: values.rating ?? undefined });
         toast.success("Testimonial created");
       }
       onOpenChange(false);
       form.reset();
-    } catch {
-      toast.error("Something went wrong");
+      setImageFile(null);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -87,6 +101,11 @@ export function TestimonialForm({ open, onOpenChange, editItem }: TestimonialFor
               <p className="text-sm text-red-500 mt-1">{form.formState.errors.content.message}</p>
             )}
           </div>
+          <ImageUploader
+            currentImageUrl={editItem?.image_url || undefined}
+            onFileSelect={setImageFile}
+            label="Review Image (Optional)"
+          />
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Label htmlFor="service_type">Service Type</Label>

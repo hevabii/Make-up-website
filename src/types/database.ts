@@ -31,6 +31,7 @@ export interface Testimonial {
   id: string;
   client_name: string;
   content: string;
+  image_url: string | null;
   service_type: string | null;
   rating: number | null;
   is_featured: boolean;

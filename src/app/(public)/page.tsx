@@ -101,7 +101,7 @@ export default async function HomePage() {
               </h2>
               <div className="luxury-divider mt-8" />
             </div>
-            <div className="grid gap-0 divide-x divide-[#CFC5B3] md:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((testimonial, index) => (
                 <TestimonialCard key={testimonial.id} testimonial={testimonial} index={index} />
               ))}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,16 +15,34 @@ interface ImageUploaderProps {
 export function ImageUploader({ currentImageUrl, onFileSelect, label = "Upload Image" }: ImageUploaderProps) {
   const [preview, setPreview] = useState<string | null>(currentImageUrl || null);
 
+  // Cleanup object URL on unmount
+  useEffect(() => {
+    return () => {
+      if (preview && preview.startsWith("blob:")) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
+
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      const file = acceptedFiles[0];
-      if (file) {
-        const objectUrl = URL.createObjectURL(file);
-        setPreview(objectUrl);
-        onFileSelect(file);
+      try {
+        const file = acceptedFiles[0];
+        if (file) {
+          // Revoke previous object URL if it exists
+          if (preview && preview.startsWith("blob:")) {
+            URL.revokeObjectURL(preview);
+          }
+          
+          const objectUrl = URL.createObjectURL(file);
+          setPreview(objectUrl);
+          onFileSelect(file);
+        }
+      } catch (error) {
+        console.error("Error handling file drop:", error);
       }
     },
-    [onFileSelect]
+    [onFileSelect, preview]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -35,6 +53,9 @@ export function ImageUploader({ currentImageUrl, onFileSelect, label = "Upload I
   });
 
   const handleRemove = () => {
+    if (preview && preview.startsWith("blob:")) {
+      URL.revokeObjectURL(preview);
+    }
     setPreview(null);
     onFileSelect(null);
   };

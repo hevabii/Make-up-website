@@ -19,7 +19,12 @@ const navLinks = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -72,31 +77,37 @@ export function Navbar() {
         </div>
 
         {/* Mobile nav */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className="md:hidden">
+        {mounted ? (
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger className="md:hidden">
+              <Menu className="h-5 w-5 text-[#5A4049]" strokeWidth={1.5} />
+            </SheetTrigger>
+            <SheetContent side="right" className="w-80 bg-[#F5EFE4] border-l border-[#CFC5B3] p-0">
+              <div className="flex flex-col items-center justify-center h-full gap-8">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "text-[12px] font-medium uppercase tracking-[0.25em] transition-colors duration-300",
+                      isActive(link.href)
+                        ? "text-[#DC7A9D]"
+                        : "text-[#B9869A] hover:text-[#5A4049]"
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <div className="luxury-divider mt-4" />
+              </div>
+            </SheetContent>
+          </Sheet>
+        ) : (
+          <button className="md:hidden">
             <Menu className="h-5 w-5 text-[#5A4049]" strokeWidth={1.5} />
-          </SheetTrigger>
-          <SheetContent side="right" className="w-80 bg-[#F5EFE4] border-l border-[#CFC5B3] p-0">
-            <div className="flex flex-col items-center justify-center h-full gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "text-[12px] font-medium uppercase tracking-[0.25em] transition-colors duration-300",
-                    isActive(link.href)
-                      ? "text-[#DC7A9D]"
-                      : "text-[#B9869A] hover:text-[#5A4049]"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
-              <div className="luxury-divider mt-4" />
-            </div>
-          </SheetContent>
-        </Sheet>
+          </button>
+        )}
       </nav>
     </header>
   );
