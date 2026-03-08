@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Plus, Trash2 } from "lucide-react";
@@ -33,7 +33,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { BlockedSlot } from "@/types/database";
-import { createBlockedSlot, deleteBlockedSlot } from "@/lib/actions/availability";
+import { createBlockedSlotRange, deleteBlockedSlot } from "@/lib/actions/availability";
 
 const HOUR_OPTIONS = Array.from({ length: 14 }, (_, i) => i + 8);
 const TIMEZONE_LABEL = "Philippine Time (PHT, UTC+8)";
@@ -49,10 +49,14 @@ function formatHour(hour: number) {
 export function AvailabilityManager({ initialItems }: { initialItems: BlockedSlot[] }) {
   const router = useRouter();
   const [slotDate, setSlotDate] = useState("");
-  const [slotHour, setSlotHour] = useState("9");
+  const [startHour, setStartHour] = useState("12");
+  const [endHour, setEndHour] = useState("15");
   const [reason, setReason] = useState("");
   const [loading, setLoading] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState<number | null>(null);
+  const [dragEnd, setDragEnd] = useState<number | null>(null);
 
   const sortedItems = useMemo(
     () => [...initialItems].sort((a, b) => {
@@ -63,6 +67,12 @@ export function AvailabilityManager({ initialItems }: { initialItems: BlockedSlo
     [initialItems]
   );
 
+  const selectedRange = useMemo(() => {
+    const start = Math.min(Number(startHour), Number(endHour));
+    const end = Math.max(Number(startHour), Number(endHour));
+    return { start, end };
+  }, [startHour, endHour]);
+
   const handleAddBlockedSlot = async () => {
     if (!slotDate) {
       toast.error("Please select a date");
@@ -71,12 +81,13 @@ export function AvailabilityManager({ initialItems }: { initialItems: BlockedSlo
 
     setLoading(true);
     try {
-      await createBlockedSlot({
+      await createBlockedSlotRange({
         slot_date: slotDate,
-        slot_hour: Number(slotHour),
+        start_hour: selectedRange.start,
+        end_hour: selectedRange.end,
         reason,
       });
-      toast.success("Time slot blocked");
+      toast.success("Time range blocked");
       setReason("");
       router.refresh();
     } catch (error) {
@@ -98,17 +109,78 @@ export function AvailabilityManager({ initialItems }: { initialItems: BlockedSlo
     setDeleteId(null);
   };
 
+  const handleDragStart = (hour: number) => {
+    setIsDragging(true);
+    setDragStart(hour);
+    setDragEnd(hour);
+  };
+
+  const handleDragEnter = (hour: number) => {
+    if (!isDragging) return;
+    setDragEnd(hour);
+  };
+
+  const handleDragEnd = () => {
+    if (dragStart === null || dragEnd === null) {
+      setIsDragging(false);
+      return;
+    }
+    const start = Math.min(dragStart, dragEnd);
+    const end = Math.max(dragStart, dragEnd);
+    setStartHour(String(start));
+    setEndHour(String(end));
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    if (!isDragging) return;
+    const onMouseUp = () => handleDragEnd();
+    window.addEventListener("mouseup", onMouseUp);
+    return () => window.removeEventListener("mouseup", onMouseUp);
+  }, [isDragging, dragStart, dragEnd]);
+
+  const inDraggedRange = (hour: number) => {
+    if (dragStart === null || dragEnd === null) return false;
+    const start = Math.min(dragStart, dragEnd);
+    const end = Math.max(dragStart, dragEnd);
+    return hour >= start && hour <= end;
+  };
+
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold tracking-tight">Availability</h1>
 
       <div className="rounded-lg border bg-white p-4 space-y-4">
         <p className="text-sm text-gray-600">
-          Block date and time slots so clients cannot select unavailable hours.
+          Drag across hours to select a range (for example, 12 PM to 3 PM), then block it.
         </p>
         <p className="text-xs text-gray-500">
           Timezone: {TIMEZONE_LABEL}
         </p>
+
+        <div className="space-y-2">
+          <Label>Drag To Select Hours</Label>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7 select-none">
+            {HOUR_OPTIONS.map((hour) => {
+              const active = inDraggedRange(hour) || (hour >= selectedRange.start && hour <= selectedRange.end);
+              return (
+                <button
+                  key={hour}
+                  type="button"
+                  onMouseDown={() => handleDragStart(hour)}
+                  onMouseEnter={() => handleDragEnter(hour)}
+                  onMouseUp={handleDragEnd}
+                  className={`rounded-md border px-3 py-2 text-sm transition-colors ${active ? "bg-gray-900 text-white border-gray-900" : "bg-white text-gray-700 border-gray-200 hover:border-gray-400"}`}
+                >
+                  {formatHour(hour)}
+                </button>
+              );
+            })}
+          </div>
+          <p className="text-xs text-gray-500">
+            Selected range: {formatHour(selectedRange.start)} to {formatHour(selectedRange.end)}
+          </p>
+        </div>
 
         <div className="grid gap-4 md:grid-cols-4">
           <div>
@@ -123,8 +195,24 @@ export function AvailabilityManager({ initialItems }: { initialItems: BlockedSlo
           </div>
 
           <div>
-            <Label>Hour</Label>
-            <Select value={slotHour} onValueChange={(value) => value && setSlotHour(value)}>
+            <Label>Start Hour</Label>
+            <Select value={startHour} onValueChange={(value) => value && setStartHour(value)}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {HOUR_OPTIONS.map((hour) => (
+                  <SelectItem key={hour} value={String(hour)}>
+                    {formatHour(hour)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div>
+            <Label>End Hour</Label>
+            <Select value={endHour} onValueChange={(value) => value && setEndHour(value)}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -151,7 +239,7 @@ export function AvailabilityManager({ initialItems }: { initialItems: BlockedSlo
 
         <Button onClick={handleAddBlockedSlot} disabled={loading}>
           <Plus className="h-4 w-4 mr-2" />
-          {loading ? "Blocking..." : "Block This Hour"}
+          {loading ? "Blocking..." : "Block Selected Range"}
         </Button>
       </div>
 
